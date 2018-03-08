@@ -6,7 +6,7 @@
 
 
 #define NCOLS 100
-#define NROWS 100000 
+#define NROWS 100000
 
 void get_walltime(double *wct) {
   struct timeval tp;
@@ -27,7 +27,7 @@ double ts,te;
   }
 
   
-  int i,j =0;
+  	int i,j =0;
   	
 	for (i=0; i<NROWS*NCOLS; i++) {
 		table[i] = 1.0;
@@ -48,8 +48,10 @@ double ts,te;
   // get ending time
   get_walltime(&te);
 
-  printf ("%f\n", ts);
-  printf ("%f\n", te);
+  double time_elapsed = te - ts;
+
+  printf ("Time elapsed is: %fsec\n", time_elapsed);
+  
 
   // check results
   printf("sum = %f\n", sum);
@@ -63,3 +65,4 @@ double ts,te;
 
   return 0;
 }
+
