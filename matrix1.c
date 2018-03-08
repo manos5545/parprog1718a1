@@ -6,6 +6,7 @@
 
 
 #define NCOLS 100
+#define NROWS 100000 
 
 void get_walltime(double *wct) {
   struct timeval tp;
@@ -25,30 +26,40 @@ double ts,te;
     exit(1);
   }
 
-  // warmup
-
-  // ...your code here...
-
+  
+  int i,j =0;
+  	
+	for (i=0; i<NROWS*NCOLS; i++) {
+		table[i] = 1.0;
+	}//We assign 1.0 beacuse we have double values and value of 1 to check accesses
+	double sum = 0.0;
+	
+	
   // get starting time (double, seconds) 
   get_walltime(&ts);
   
   // workload
-
-  // ...your code here...
+	for (i=0; i<NROWS; i++) {
+		for (j=0; j<NCOLS; j++) {
+			sum += table[i*NCOLS+j];
+		}
+	}
 
   // get ending time
   get_walltime(&te);
 
-  // check results
-  
-  // ...your code here...
+  printf ("%f\n", ts);
+  printf ("%f\n", te);
 
+  // check results
+  printf("sum = %f\n", sum);
+  // ...your code here...
+  double m_acc = ((double)NROWS*NCOLS)/((te-ts)*1e6);
   // print time elapsed and/or Maccesses/sec
-  
+  printf("average array element Maccesses/sec = %f\n", m_acc);
   // ...your code here...  
   
   free(table);
 
   return 0;
 }
-
