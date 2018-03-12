@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
@@ -15,7 +14,6 @@ void get_walltime(double *wct) {
   *wct = (double)(tp.tv_sec+tp.tv_usec/1000000.0);
 }
 
-
 int main() {
 double *table;
 double ts,te;
@@ -28,11 +26,15 @@ double ts,te;
   }
 
   
-  	int i,j =0;
+  	
+	int i,j =0;
+  	
+  	
   	
 	for (i=0; i<NROWS*NCOLS; i++) {
 		table[i] = 1.0;
-	}//We assign 1.0 beacuse we have double values and value of 1 to check accesses
+	}//We assign 1.0 beacuse we have double values and value of 1 is used to check accesses
+	
 	double sum = 0.0;
 	
 	
@@ -42,7 +44,7 @@ double ts,te;
   // workload
 	for (i=0; i<NCOLS; i++) {
 		for (j=0; j<NROWS; j++) {
-			sum += table[i*NROWS+j];
+			sum += table[i,j];
 		}
 	}
 
@@ -51,15 +53,14 @@ double ts,te;
 
   double time_elapsed = te - ts;
 
-  printf ("Time elapsed is: %fsec\n", time_elapsed);
+  printf ("Time elapsed: %fsec\n", time_elapsed);
   
-
   // check results
-  printf("sum = %f\n", sum);
+  printf("Accesses = %f\n", sum);
   
-  double m_acc = ((double)NROWS*NCOLS)/((te-ts)*1e6);
+  double m_acc = ((double)NROWS*NCOLS)/(time_elapsed*1e6);
   
-  printf("average array element Maccesses/sec = %f\n", m_acc);
+  printf("Array element Maccesses/sec = %f\n", m_acc);
   
   
   free(table);
