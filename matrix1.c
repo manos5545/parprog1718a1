@@ -55,11 +55,11 @@ double ts,te;
 
   // check results
   printf("sum = %f\n", sum);
-  // ...your code here...
+  
   double m_acc = ((double)NROWS*NCOLS)/((te-ts)*1e6);
-  // print time elapsed and/or Maccesses/sec
+  
   printf("average array element Maccesses/sec = %f\n", m_acc);
-  // ...your code here...  
+  
   
   free(table);
 
